@@ -1,2 +1,14 @@
-<div class="container"><button mat-button>Click me!</button></div>
-<router-outlet></router-outlet>
+<mat-toolbar color="primary"> 
+    <span>Angular News</span> <span class="spacer"></span>
+    <div>
+       <button mat-button [routerLink]="['/']">Home</button>
+       <button mat-button [routerLink]="['/headlines']">Headlines</button>
+       <button mat-button [routerLink]="['/sources']">Sources</button>
+       <button mat-button [routerLink]="['/favorites']">Favorites</button>
+    </div>
+</mat-toolbar>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+
