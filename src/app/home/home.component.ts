@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { subscribeOn } from 'rxjs';
 import { NewsService } from '../services/news.service';
 
@@ -7,8 +7,9 @@ import { NewsService } from '../services/news.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   news: any;
+  newsSubscription: any;
 
   constructor(private newsService: NewsService) { }
 
@@ -17,9 +18,29 @@ export class HomeComponent implements OnInit {
   }
 
   getData(){
-    this.newsService.getData('top-headlines?country=us').subscribe(data => {
+    this.newsSubscription = this.newsService.getData('top-headlines?country=us')
+    .subscribe(data => {
       this.news = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.newsSubscription.unsubscribe();
+  }
+
+  onFavorite(article: any) 
+  {
+   console.log(article); 
+
+   let items = [];
+   const val = localStorage.getItem('items');
+
+   if(val != null){
+     items = JSON.parse(val);
+   }
+   items.push(article);
+  localStorage.setItem('items', JSON.stringify(items));
+
   }
 
 }
