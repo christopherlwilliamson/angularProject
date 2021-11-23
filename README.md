@@ -1,5 +1,7 @@
 # AngularNews
 
+This project demonstrates usage of Angular materials and JS/TS to create a dynamic news website
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
 
 ## Development server
